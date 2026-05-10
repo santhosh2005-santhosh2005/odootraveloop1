@@ -220,7 +220,8 @@ export function createApp(): express.Application {
   app.use('/uploads/journey', express.static(path.join(__dirname, '../uploads/journey')));
   
   // Serve the cinematic landing page at the root
-  app.use('/', express.static(path.join(__dirname, '../../designlanding')));
+  const landingPath = path.resolve(process.cwd(), '../designlanding');
+  app.use('/', express.static(landingPath));
 
   // Photos require either a valid logged-in session (via JWT with the
   // password_version gate) OR a share token that covers the SPECIFIC
@@ -488,7 +489,7 @@ export function createApp(): express.Application {
 
   // Production static file serving
   if (process.env.NODE_ENV === 'production') {
-    const publicPath = path.join(__dirname, '../public');
+    const publicPath = path.resolve(process.cwd(), 'public');
     app.use(express.static(publicPath, {
       setHeaders: (res, filePath) => {
         if (filePath.endsWith('index.html')) {
@@ -496,9 +497,24 @@ export function createApp(): express.Application {
         }
       },
     }));
-    app.get('*', (_req: Request, res: Response) => {
-      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-      res.sendFile(path.join(publicPath, 'index.html'));
+    app.get('*', (req: Request, res: Response) => {
+      const indexPath = path.join(publicPath, 'index.html');
+      if (fs.existsSync(indexPath)) {
+        res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.sendFile(indexPath);
+      } else {
+        // If the SPA index is missing, we fall back to a helpful error message
+        // instead of a generic 404. This helps debug build issues on Render.
+        res.status(404).send(`
+          <h1>404 - Frontend Not Found</h1>
+          <p>The server is running, but the built frontend files were not found in <code>/server/public</code>.</p>
+          <p>This usually means the build step failed or the files were not copied correctly.</p>
+          <hr>
+          <p><b>Request Path:</b> ${req.path}</p>
+          <p><b>Resolved Public Path:</b> ${publicPath}</p>
+          <p><b>Environment:</b> ${process.env.NODE_ENV}</p>
+        `);
+      }
     });
   }
 
