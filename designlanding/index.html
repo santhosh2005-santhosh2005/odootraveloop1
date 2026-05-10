@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveloop – Explore the World</title>
+    <meta name="description" content="Traveloop – Your gateway to exploring the world's most breathtaking destinations with curated travel experiences.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    <!-- =========================================================
+         TRANSPARENT / LIQUID-GLASS NAVBAR (always floating over video)
+    ========================================================= -->
+    <header id="navbar">
+        <nav class="nav-inner">
+            <div class="nav-left">
+                <a href="#" class="nav-link">Explore</a>
+                <a href="#wonders" class="nav-link">Destinations</a>
+                <a href="#events" class="nav-link">Events</a>
+            </div>
+
+            <div class="logo">
+                <!-- simple animated ring logo -->
+                <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="22" cy="22" r="20" stroke="white" stroke-width="2" opacity="0.8"/>
+                    <polygon points="22,10 32,30 12,30" fill="white" opacity="0.9"/>
+                </svg>
+                <span class="logo-text">TRAVELOOP</span>
+            </div>
+
+            <div class="nav-right">
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="http://localhost:5173/login" class="nav-cta">Book Now</a>
+            </div>
+
+            <!-- mobile hamburger -->
+            <button class="hamburger" id="hamburger" aria-label="Open menu">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- =========================================================
+         HERO – FULLSCREEN DRONE VIDEO
+    ========================================================= -->
+    <section class="hero" id="home">
+        <!-- 4K autoplay drone video -->
+        <video
+            id="hero-video"
+            class="hero-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto">
+            <source src="Drone_shot_Brihadeeswarar_Temple…_202605101317.mp4" type="video/mp4">
+        </video>
+
+        <!-- subtle cinematic gradient overlay -->
+        <div class="hero-overlay"></div>
+
+        <!-- hero content -->
+        <div class="hero-content">
+            <h1 class="hero-title">TRAVELOOP</h1>
+            <a href="http://localhost:5173/login" class="btn-get-started">Get Started</a>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         NATURAL WONDERS SECTION
+    ========================================================= -->
+    <section class="wonders" id="wonders">
+        <div class="container">
+            <div class="wonders-header">
+                <h2>A Land of Natural &amp; Cultural Wonders</h2>
+                <p>Discover curated travel experiences — from ancient temples to pristine coastlines — crafted for explorers who seek the extraordinary.</p>
+            </div>
+            <div class="wonders-grid">
+                <div class="wonder-card wonder-split">
+                    <div class="split-video">
+                        <video autoplay muted loop playsinline>
+                            <source src="assets/Airplane_bursts_from_website_banner_202605101359.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="split-content">
+                        <span class="card-icon-badge"><i data-lucide="plane"></i></span>
+                        <h3>Unmatched Flight Experiences</h3>
+                        <p>Take to the skies with our premium airline partners. From luxury cabins to breathtaking window views, your journey is as important as the destination.</p>
+                        <ul class="split-features">
+                            <li><i data-lucide="check"></i> 4K In-flight Entertainment</li>
+                            <li><i data-lucide="check"></i> Premium Lounge Access</li>
+                            <li><i data-lucide="check"></i> Direct Global Routes</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="wonder-small-cards">
+                    <div class="wonder-card small">
+                        <div class="card-icon"><i data-lucide="building-2"></i></div>
+                        <h3>Sydney Opera House</h3>
+                        <p>An architectural icon nestled on the harbour — where culture meets the sea.</p>
+                    </div>
+                    <div class="wonder-card small">
+                        <div class="card-icon"><i data-lucide="palmtree"></i></div>
+                        <h3>Gold Coast</h3>
+                        <p>Sun-soaked beaches, world-class surf, and a vibrant coastal lifestyle.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         ISLAND GRID SECTION
+    ========================================================= -->
+    <section class="island" id="island">
+        <div class="container">
+            <div class="section-title">
+                <h2>Australia, the world's largest island and smallest continent</h2>
+            </div>
+            <div class="island-grid">
+                <div class="island-card reveal-card">
+                    <div class="image-wrapper"><img src="assets/koala.png" alt="Koala"></div>
+                    <h3>Great Barrier Reef</h3>
+                    <p>One of the world's natural wonders — a must-see for nature enthusiasts.</p>
+                </div>
+                <div class="island-card reveal-card">
+                    <div class="image-wrapper"><img src="assets/hero.png" alt="Sydney Opera House"></div>
+                    <h3>Sydney Opera House</h3>
+                    <p>Enjoy the iconic landmarks in Australia's most famous harbour city.</p>
+                </div>
+                <div class="island-card reveal-card">
+                    <div class="image-wrapper"><img src="assets/goldcoast.png" alt="Gold Coast"></div>
+                    <h3>Gold Coast</h3>
+                    <p>A paradise for beach lovers and water sports enthusiasts the world over.</p>
+                </div>
+            </div>
+            <div class="see-all">
+                <span>Let's Make People Feel Amazed</span>
+                <a href="#" class="see-all-link">See All Views <i data-lucide="arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         EVENTS / VIDEO SECTION
+    ========================================================= -->
+    <section class="events" id="events">
+        <div class="container">
+            <div class="events-header">
+                <h2>Unforgettable moments with unique events</h2>
+                <div class="slider-controls">
+                    <button class="ctrl-btn prev"><i data-lucide="arrow-left"></i></button>
+                    <button class="ctrl-btn next"><i data-lucide="arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="video-container">
+                <video class="video-thumbnail" autoplay muted loop playsinline>
+                    <source src="Taj_Mahal_drone_shot_sunrise_202605101350.mp4" type="video/mp4">
+                </video>
+                <div class="video-info">
+                    <div class="video-text">
+                        <h3>Explore India's Golden Triangle</h3>
+                        <p>Embark on a journey through time. Witness the eternal beauty of the Taj Mahal at sunrise and discover the rich heritage of India's most iconic monuments.</p>
+                    </div>
+                    <div class="video-price">
+                        <span>Start From</span>
+                        <strong>$899.00</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =========================================================
+         DESTINATIONS SECTION
+    ========================================================= -->
+    <section class="destinations" id="destinations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Explore Must-Visit Destinations &amp; Iconic Sites</h2>
+            </div>
+            <div class="destinations-grid">
+                <div class="dest-card reveal-card">
+                    <img src="assets/river.png" alt="Goulburn River">
+                    <div class="dest-overlay">
+                        <button onclick="window.location.href='http://localhost:5173/login'" class="book-btn">Book Now</button>
+                        <span class="tag">Shepparton</span>
+                        <h3>Goulburn River</h3>
+                        <p>A major inland perennial river of the Goulburn Broken Catchment.</p>
+                    </div>
+                </div>
+                <div class="dest-card reveal-card">
+                    <img src="assets/reef.png" alt="Barossa Valley">
+                    <div class="dest-overlay">
+                        <span class="tag">South Australia</span>
+                        <h3>Barossa Valley</h3>
+                    </div>
+                </div>
+                <div class="dest-card reveal-card">
+                    <img src="assets/goldcoast.png" alt="Byron Bay">
+                    <div class="dest-overlay">
+                        <span class="tag">New South Wales</span>
+                        <h3>Byron Bay</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- =========================================================
+         CTA BANNER
+    ========================================================= -->
+    <section class="cta" id="contact">
+        <div class="container cta-content">
+            <h2>Don't miss the chance to explore these wonders</h2>
+            <button onclick="window.location.href='http://localhost:5173/login'" class="join-btn">Join Now</button>
+            <img src="assets/hero.png" alt="Temple landscape" class="cta-bg">
+        </div>
+    </section>
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="mailto:hello@awsy.com" class="footer-email">hello@awsy.com</a>
+                <p>Technology Park, F-10 Gumpang,<br>Residence 57162 Surakarta, Indonesia</p>
+            </div>
+            <div class="footer-col">
+                <h4>Email Address</h4>
+                <a href="#">hello@awsy.com</a>
+                <a href="#">info@awsy.com</a>
+                <a href="#">awsy@gmail.com</a>
+            </div>
+            <div class="footer-col">
+                <h4>Phone Number</h4>
+                <p>(0271) 781-4564 332</p>
+                <p>+62 124 720 183 342</p>
+            </div>
+            <div class="footer-col">
+                <p>Technology Park, F-10 Gumpang,<br>Residence 57162 Surakarta, Indonesia</p>
+            </div>
+            <div class="footer-cta">
+                <h3>Reach Out<br>with Awsy</h3>
+                <div class="cta-circle"><i data-lucide="arrow-up-right"></i></div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <div class="socials">
+                <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+                <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            </div>
+            <p>All rights reserved © Awsy 2026</p>
+            <div class="socials">
+                <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                <a href="#" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+                <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
