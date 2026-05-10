@@ -11,22 +11,32 @@ if (!fs.existsSync(UPLOADS_DIR)) {
 }
 
 /**
- * Upload a file to storage
+ * Upload a file to storage.
+ * Handles both raw Buffers and Multer file objects.
  */
 export async function uploadFile(
-  fileBuffer: Buffer,
-  originalName: string,
-  mimeType: string
+  fileOrBuffer: Buffer | any,
+  originalName?: string,
+  mimeType?: string
 ): Promise<{ path: string; url: string }> {
+  // If it's a Multer file object, it's already on disk
+  if (fileOrBuffer && typeof fileOrBuffer === 'object' && 'path' in fileOrBuffer) {
+    return {
+      path: fileOrBuffer.filename, // We store the relative filename in the DB
+      url: `/api/files/${fileOrBuffer.filename}`
+    };
+  }
+
+  // Otherwise, it's a Buffer that we need to save
   const fileId = uuidv4();
-  const extension = path.extname(originalName);
+  const extension = originalName ? path.extname(originalName) : '';
   const fileName = `${fileId}${extension}`;
   const filePath = path.join(UPLOADS_DIR, fileName);
 
-  await fs.promises.writeFile(filePath, fileBuffer);
+  await fs.promises.writeFile(filePath, fileOrBuffer);
 
   return {
-    path: filePath,
+    path: fileName,
     url: `/api/files/${fileName}`
   };
 }

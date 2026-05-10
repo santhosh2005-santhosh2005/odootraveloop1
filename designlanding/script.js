@@ -91,4 +91,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Ensure initial progress state
     showTestimonial(0);
+
+    // ─── Video Modal Logic (80/20 split) ─────────────────────
+    const videoContainer = document.querySelector('.video-container');
+    const videoModal = document.getElementById('video-modal');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+    const modalVideoEl = document.getElementById('modal-video-el');
+
+    if (videoContainer && videoModal) {
+        videoContainer.style.cursor = 'zoom-in';
+        
+        videoContainer.addEventListener('click', () => {
+            videoModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            if (modalVideoEl) {
+                modalVideoEl.currentTime = 0;
+                modalVideoEl.play();
+            }
+        });
+
+        const closeModal = () => {
+            videoModal.classList.remove('active');
+            document.body.style.overflow = '';
+            if (modalVideoEl) modalVideoEl.pause();
+        };
+
+        modalCloseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeModal();
+        });
+
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) closeModal();
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
 });

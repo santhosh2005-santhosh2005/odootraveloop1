@@ -314,7 +314,37 @@ function seedExampleTrips(db: Database.Database, adminId: number, demoId: number
   insertAssignment.run(t6days[0], t6pIds[0], 0);
   insertMember.run(t6, demoId, adminId);
 
-  console.log('[Demo] 6 example trips seeded and shared with demo user');
+  // --- Trip 7: Iran Heritage ---
+  const trip7 = insertTrip.run(adminId, 'iran', 'A journey through ancient Persia — stunning mosques, bustling bazaars, and history.', '2026-05-20', '2026-05-30', 'IRR');
+  const t7 = Number(trip7.lastInsertRowid);
+  const t7days: number[] = [];
+  for (let i = 0; i < 10; i++) {
+    t7days.push(Number(insertDay.run(t7, i + 1, `2026-05-${20 + i}`).lastInsertRowid));
+  }
+  const t7pIds = [
+    Number(insertPlace.run(t7, 'Nasir al-Mulk Mosque', 29.6089, 52.5485, 'Shiraz, Iran', 3, '08:00', 90, 'The Pink Mosque. Stunning stained glass.', null, null, null, null).lastInsertRowid),
+    Number(insertPlace.run(t7, 'Persepolis', 29.9344, 52.8913, 'Fars Province, Iran', 3, '09:00', 180, 'Capital of the Achaemenid Empire.', null, null, null, null).lastInsertRowid),
+  ];
+  insertAssignment.run(t7days[0], t7pIds[0], 0);
+  insertAssignment.run(t7days[1], t7pIds[1], 0);
+  insertMember.run(t7, demoId, adminId);
+
+  // --- Trip 8: USA Road Trip ---
+  const trip8 = insertTrip.run(adminId, 'USA Explorer', 'Iconic cities and national parks — New York to San Francisco.', '2026-07-04', '2026-07-20', 'USD');
+  const t8 = Number(trip8.lastInsertRowid);
+  const t8days: number[] = [];
+  for (let i = 0; i < 16; i++) {
+    t8days.push(Number(insertDay.run(t8, i + 1, `2026-07-${4 + i}`).lastInsertRowid));
+  }
+  const t8pIds = [
+    Number(insertPlace.run(t8, 'Grand Canyon South Rim', 36.0544, -112.1401, 'Arizona, USA', 9, '06:00', 300, 'Breathtaking natural wonder.', null, null, null, null).lastInsertRowid),
+    Number(insertPlace.run(t8, 'Golden Gate Bridge', 37.8199, -122.4783, 'San Francisco, CA', 3, '10:00', 60, 'Walk across for the best views.', null, null, null, null).lastInsertRowid),
+  ];
+  insertAssignment.run(t8days[0], t8pIds[0], 0);
+  insertAssignment.run(t8days[1], t8pIds[1], 0);
+  insertMember.run(t8, demoId, adminId);
+
+  console.log('[Demo] 8 example trips seeded and shared with demo user');
 }
 
 export { seedDemoData };

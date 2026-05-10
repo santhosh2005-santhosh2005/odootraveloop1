@@ -215,9 +215,10 @@ export function createApp(): express.Application {
   // not embedded in unauthenticated UI contexts, so that endpoint IS
   // gated (session JWT with pv, or a share token scoped to the photo's
   // trip).
-  app.use('/uploads/avatars', express.static(path.join(__dirname, '../uploads/avatars')));
-  app.use('/uploads/covers', express.static(path.join(__dirname, '../uploads/covers')));
-  app.use('/uploads/journey', express.static(path.join(__dirname, '../uploads/journey')));
+  const uploadsBase = path.resolve(process.cwd(), 'uploads');
+  app.use('/uploads/avatars', express.static(path.join(uploadsBase, 'avatars')));
+  app.use('/uploads/covers', express.static(path.join(uploadsBase, 'covers')));
+  app.use('/uploads/journey', express.static(path.join(uploadsBase, 'journey')));
   
   // Serve the cinematic landing page at the root
   const landingPath = path.resolve(process.cwd(), '../designlanding');
@@ -230,9 +231,10 @@ export function createApp(): express.Application {
   // unguessable, but the auth model was wrong.
   app.get('/uploads/photos/:filename', (req: Request, res: Response) => {
     const safeName = path.basename(req.params.filename);
-    const filePath = path.join(__dirname, '../uploads/photos', safeName);
+    const uploadsBase = path.resolve(process.cwd(), 'uploads');
+    const filePath = path.join(uploadsBase, 'photos', safeName);
     const resolved = path.resolve(filePath);
-    if (!resolved.startsWith(path.resolve(__dirname, '../uploads/photos'))) {
+    if (!resolved.startsWith(path.join(uploadsBase, 'photos'))) {
       return res.status(403).send('Forbidden');
     }
     // existsSync here is cheap and avoids a sendFile error frame; kept
