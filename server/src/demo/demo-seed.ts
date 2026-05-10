@@ -273,7 +273,48 @@ function seedExampleTrips(db: Database.Database, adminId: number, demoId: number
 
   insertMember.run(t3, demoId, adminId);
 
-  console.log('[Demo] 3 example trips seeded and shared with demo user');
+  // --- Trip 4: Paris Romance ---
+  const trip4 = insertTrip.run(adminId, 'Paris Romance', 'A romantic week in the City of Light — Eiffel Tower, Louvre, and charming cafes.', '2026-10-10', '2026-10-16', 'EUR');
+  const t4 = Number(trip4.lastInsertRowid);
+  const t4days: number[] = [];
+  for (let i = 0; i < 7; i++) {
+    t4days.push(Number(insertDay.run(t4, i + 1, `2026-10-${10 + i}`).lastInsertRowid));
+  }
+  const t4pIds = [
+    Number(insertPlace.run(t4, 'Hôtel Plaza Athénée', 48.8661, 2.3039, '25 Av. Montaigne, 75008 Paris, France', 1, '15:00', 60, 'Luxury stay with Eiffel Tower views.', null, null, null, null).lastInsertRowid),
+    Number(insertPlace.run(t4, 'Eiffel Tower', 48.8584, 2.2945, 'Champ de Mars, 5 Av. Anatole France, 75007 Paris, France', 3, '10:00', 120, 'Iconic landmark. Sunset is best.', null, null, null, null).lastInsertRowid),
+  ];
+  insertAssignment.run(t4days[0], t4pIds[0], 0);
+  insertAssignment.run(t4days[1], t4pIds[1], 0);
+  insertMember.run(t4, demoId, adminId);
+
+  // --- Trip 5: Dubai Luxury ---
+  const trip5 = insertTrip.run(adminId, 'Dubai Luxury', 'Experience the future in the desert — skyscrapers, shopping, and sand dunes.', '2026-12-01', '2026-12-07', 'AED');
+  const t5 = Number(trip5.lastInsertRowid);
+  const t5days: number[] = [];
+  for (let i = 0; i < 7; i++) {
+    t5days.push(Number(insertDay.run(t5, i + 1, `2026-12-${1 + i}`).lastInsertRowid));
+  }
+  const t5pIds = [
+    Number(insertPlace.run(t5, 'Burj Khalifa', 25.1972, 55.2744, '1 Sheikh Mohammed bin Rashid Blvd, Dubai', 3, '17:00', 120, 'Tallest building in the world.', null, null, null, null).lastInsertRowid),
+  ];
+  insertAssignment.run(t5days[0], t5pIds[0], 0);
+  insertMember.run(t5, demoId, adminId);
+
+  // --- Trip 6: India Heritage (Chennai) ---
+  const trip6 = insertTrip.run(adminId, 'Chennai Coastal Escape', 'Exploring the vibrant culture and beaches of Southern India.', '2026-02-15', '2026-02-21', 'INR');
+  const t6 = Number(trip6.lastInsertRowid);
+  const t6days: number[] = [];
+  for (let i = 0; i < 7; i++) {
+    t6days.push(Number(insertDay.run(t6, i + 1, `2026-02-${15 + i}`).lastInsertRowid));
+  }
+  const t6pIds = [
+    Number(insertPlace.run(t6, 'Marina Beach', 13.0475, 80.2824, 'Chennai, Tamil Nadu, India', 8, '17:00', 90, 'One of the longest urban beaches.', null, null, null, null).lastInsertRowid),
+  ];
+  insertAssignment.run(t6days[0], t6pIds[0], 0);
+  insertMember.run(t6, demoId, adminId);
+
+  console.log('[Demo] 6 example trips seeded and shared with demo user');
 }
 
 export { seedDemoData };

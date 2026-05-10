@@ -6,7 +6,14 @@
 import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import sharp from 'sharp';
+let sharp;
+try {
+  const sharpModule = await import('sharp');
+  sharp = sharpModule.default;
+} catch (e) {
+  console.warn('  ! Sharp not found. Skipping PWA icon generation. This is fine for deployment.');
+  process.exit(0); // Exit successfully to allow the build to continue
+}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const iconsDir = join(__dirname, '..', 'public', 'icons');
